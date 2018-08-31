@@ -147,7 +147,7 @@ public class PatraoExec extends JFrame{
     	this.setLayout(null);
     	this.setVisible(true);
    		this.setSize(600, 275);
-   		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+   		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
    	public static void main(String[] args){
        	PatraoExec JPatr = new PatraoExec();
