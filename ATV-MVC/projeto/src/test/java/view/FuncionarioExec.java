@@ -187,7 +187,7 @@ public class FuncionarioExec extends JFrame{
     	this.setLayout(null);
     	this.setVisible(true);
    		this.setSize(600, 425);
-   		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+   		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
    	public static void main(String[] args){
        	FuncionarioExec JFunc = new FuncionarioExec();
