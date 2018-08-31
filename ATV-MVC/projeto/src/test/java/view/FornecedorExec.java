@@ -157,7 +157,7 @@ public class FornecedorExec extends JFrame{
     	this.setLayout(null);
     	this.setVisible(true);
    		this.setSize(600, 300);
-   		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+   		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
    	public static void main(String[] args){
        	FornecedorExec JForn = new FornecedorExec();
