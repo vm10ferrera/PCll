@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 29-Ago-2018 às 03:08
+-- Generation Time: 01-Set-2018 às 00:39
 -- Versão do servidor: 5.7.17
 -- PHP Version: 5.6.30
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `empresa`
 --
+CREATE DATABASE IF NOT EXISTS `empresa` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `empresa`;
 
 -- --------------------------------------------------------
 
@@ -29,22 +31,14 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `fornecedor` (
-  `id_forn` int(3) NOT NULL,
+  `id_forn` int(11) NOT NULL,
   `nome_forn` varchar(150) NOT NULL,
   `nome_produto` varchar(150) NOT NULL,
-  `endereco_forn` varchar(100) NOT NULL,
+  `endereco_forn` varchar(150) NOT NULL,
   `email_forn` varchar(150) NOT NULL,
   `telefone_forn` int(9) NOT NULL,
   `id_patrao` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `fornecedor`
---
-
-INSERT INTO `fornecedor` (`id_forn`, `nome_forn`, `nome_produto`, `endereco_forn`, `email_forn`, `telefone_forn`, `id_patrao`) VALUES
-(1, 'wanderlei Augusto da Silva', 'bala de chiclete', 'Rua Casa, 58', 'func1@3.com', 123456789, 0),
-(2, 'eric', 'andes', 'atr', 'oiu', 0, 2);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -53,25 +47,17 @@ INSERT INTO `fornecedor` (`id_forn`, `nome_forn`, `nome_produto`, `endereco_forn
 --
 
 CREATE TABLE `funcionario` (
-  `id_func` int(3) NOT NULL,
+  `id_func` int(11) NOT NULL,
   `nome_func` varchar(150) NOT NULL,
   `endereco_func` varchar(150) NOT NULL,
-  `bairro_func` varchar(100) NOT NULL,
+  `bairro_func` varchar(150) NOT NULL,
   `cep_func` int(8) NOT NULL,
   `cpf_func` int(11) NOT NULL,
-  `email_func` varchar(100) NOT NULL,
+  `email_func` varchar(150) NOT NULL,
   `telefone_func` int(9) NOT NULL,
   `rg_func` int(9) NOT NULL,
   `id_patrao` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `funcionario`
---
-
-INSERT INTO `funcionario` (`id_func`, `nome_func`, `endereco_func`, `bairro_func`, `cep_func`, `cpf_func`, `email_func`, `telefone_func`, `rg_func`, `id_patrao`) VALUES
-(1, 'wanderlei Augusto da Silva', 'Rua Casa, 58', 'Jardim Cerejeira', 87654320, 1234567890, 'func1@3.com', 123456789, 123456789, 0),
-(2, 'aLDAIR', 'RAE', 'SER', 1081, 4321, 'DRT', 123, 1234, 2);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -80,20 +66,13 @@ INSERT INTO `funcionario` (`id_func`, `nome_func`, `endereco_func`, `bairro_func
 --
 
 CREATE TABLE `patrao` (
-  `id_patrao` int(3) NOT NULL,
+  `id_patrao` int(11) NOT NULL,
   `nome_patrao` varchar(150) NOT NULL,
   `nome_empresa` varchar(150) NOT NULL,
-  `endereco_patrao` varchar(100) NOT NULL,
+  `endereco_patrao` varchar(150) NOT NULL,
   `email_patrao` varchar(150) NOT NULL,
   `telefone_patrao` int(9) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `patrao`
---
-
-INSERT INTO `patrao` (`id_patrao`, `nome_patrao`, `nome_empresa`, `endereco_patrao`, `email_patrao`, `telefone_patrao`) VALUES
-(1, 'wanderlei Augusto da Silva', 'Ibiturinho', 'Rua Casa, 58', 'func1@3.com', 123456789);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -102,24 +81,14 @@ INSERT INTO `patrao` (`id_patrao`, `nome_patrao`, `nome_empresa`, `endereco_patr
 --
 
 CREATE TABLE `socio` (
-  `id_socio` int(3) NOT NULL,
+  `id_socio` int(11) NOT NULL,
   `nome_socio` varchar(150) NOT NULL,
   `endereco_socio` varchar(150) NOT NULL,
-  `email_socio` varchar(100) NOT NULL,
+  `email_socio` varchar(150) NOT NULL,
   `telefone_socio` int(9) NOT NULL,
   `valor_contri` int(225) NOT NULL,
   `id_patrao` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `socio`
---
-
-INSERT INTO `socio` (`id_socio`, `nome_socio`, `endereco_socio`, `email_socio`, `telefone_socio`, `valor_contri`, `id_patrao`) VALUES
-(1, 'wanderlei Augusto da Silva', 'Rua Casa, 58', 'func1@3.com', 123456789, 3000, 0),
-(2, 'ALDAIR', 'E', 'E', 123, 333, 2);
-
-
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -129,13 +98,15 @@ INSERT INTO `socio` (`id_socio`, `nome_socio`, `endereco_socio`, `email_socio`, 
 -- Indexes for table `fornecedor`
 --
 ALTER TABLE `fornecedor`
-  ADD PRIMARY KEY (`id_forn`);
+  ADD PRIMARY KEY (`id_forn`),
+  ADD KEY `id_patrao` (`id_patrao`);
 
 --
 -- Indexes for table `funcionario`
 --
 ALTER TABLE `funcionario`
-  ADD PRIMARY KEY (`id_func`);
+  ADD PRIMARY KEY (`id_func`),
+  ADD KEY `id_patrao` (`id_patrao`);
 
 --
 -- Indexes for table `patrao`
@@ -147,7 +118,8 @@ ALTER TABLE `patrao`
 -- Indexes for table `socio`
 --
 ALTER TABLE `socio`
-  ADD PRIMARY KEY (`id_socio`);
+  ADD PRIMARY KEY (`id_socio`),
+  ADD KEY `id_patrao` (`id_patrao`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -157,22 +129,44 @@ ALTER TABLE `socio`
 -- AUTO_INCREMENT for table `fornecedor`
 --
 ALTER TABLE `fornecedor`
-  MODIFY `id_forn` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_forn` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `id_func` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_func` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `patrao`
 --
 ALTER TABLE `patrao`
-  MODIFY `id_patrao` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_patrao` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `socio`
 --
 ALTER TABLE `socio`
-  MODIFY `id_socio` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;COMMIT;
+  MODIFY `id_socio` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Limitadores para a tabela `fornecedor`
+--
+ALTER TABLE `fornecedor`
+  ADD CONSTRAINT `fk_id_forn` FOREIGN KEY (`id_patrao`) REFERENCES `patrao` (`id_patrao`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `funcionario`
+--
+ALTER TABLE `funcionario`
+  ADD CONSTRAINT `fk_id_func` FOREIGN KEY (`id_patrao`) REFERENCES `patrao` (`id_patrao`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `socio`
+--
+ALTER TABLE `socio`
+  ADD CONSTRAINT `fk_id_soc` FOREIGN KEY (`id_patrao`) REFERENCES `patrao` (`id_patrao`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
