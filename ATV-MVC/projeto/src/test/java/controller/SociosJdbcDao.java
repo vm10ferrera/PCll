@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.table.DefaultTableModel;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -48,30 +51,39 @@ public class SociosJdbcDao {
 			e.printStackTrace();{}}
 		}
 		
-		public List<Socio> listar() {
-			String sql = "select * from socio";
-	        System.out.println(sql);		
-	        List<Socio> Socios = new ArrayList<Socio>();
-			try {
-				PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
-				ResultSet rs = prepareStatement.executeQuery();
-				while(rs.next()) {
-					int id = rs.getInt("id");
-					String nome = rs.getString("nome_socio");
-					String endereco = rs.getString("endereco_socio");
-					int telefone = rs.getInt("telefone_socio");
-					String email = rs.getString("email_socio");
-					int vlct = rs.getInt("valor_contri");
-					int idpatr = rs.getInt("id_patrao");
-					
-					Socio socio = new Socio();
-					 System.out.println(nome + " " +  endereco + " " + telefone + " " + email + " " + vlct + " " + idpatr);
-				}
-				prepareStatement.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+public DefaultTableModel select() throws Exception{
+		
+		DefaultTableModel dtm = new DefaultTableModel() {
+			public boolean isCellEditable(int row, int column) {
+				return false;
 			}
-			return Socios;
-}
+		};
+		
+		String sql = "select * from socio";
+		
+		try {
+			PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
+			ResultSet rs = prepareStatement.executeQuery();
+			
+			dtm.addColumn("ID");
+			dtm.addColumn("Nome");;
+			dtm.addColumn("Endereço");
+			dtm.addColumn("E-mail");
+			dtm.addColumn("Telefone");
+			dtm.addColumn("Valor contribuido");
+			dtm.addColumn("Id do Patrão");
+			
+			while(rs.next()) {
+				dtm.addRow(new String[] {rs.getString("id_socio"),rs.getString("nome_socio"),rs.getString("endereco_socio"),rs.getString("email_socio"),rs.getString("telefone_socio"),rs.getString("valor_contri"),rs.getString("id_patrao")});
+			}
+			
+			prepareStatement.close();
+			
+		}catch(Exception s) {
+			s.printStackTrace();
+		}
+		
+		return dtm;
+	}
 	}
 
