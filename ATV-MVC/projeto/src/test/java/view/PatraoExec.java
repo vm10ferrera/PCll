@@ -36,6 +36,7 @@ public class PatraoExec extends JFrame{
     JButton btnSalvar = new JButton("Salvar");
     JButton btnDeletar = new JButton("Deletar");
     JButton btnAtualizar = new JButton("Atualizar");
+    JButton btnListar = new JButton("Listar");
 
     public PatraoExec() {
     	super("Cadastro");
@@ -140,6 +141,15 @@ public class PatraoExec extends JFrame{
     				ex.printStackTrace();
    				}
    				
+   			}
+   		});
+   		
+   		paine.add(btnListar);
+   		btnListar.setBounds(400, 200, 130, 30);
+   		btnListar.addActionListener(new ActionListener(){
+   			public void actionPerformed(ActionEvent e){
+    			ListarPatr Patr = new ListarPatr();
+    			Patr.setVisible(true);
    			}
    		});
     		
