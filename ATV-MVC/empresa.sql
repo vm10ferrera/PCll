@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 01-Set-2018 às 00:39
+-- Generation Time: 01-Set-2018 às 01:31
 -- Versão do servidor: 5.7.17
 -- PHP Version: 5.6.30
 
@@ -40,6 +40,13 @@ CREATE TABLE `fornecedor` (
   `id_patrao` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `fornecedor`
+--
+
+INSERT INTO `fornecedor` (`id_forn`, `nome_forn`, `nome_produto`, `endereco_forn`, `email_forn`, `telefone_forn`, `id_patrao`) VALUES
+(1, 'Jakeline', '14 anos', 'erty', 'eryyyy', 1234, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -59,6 +66,13 @@ CREATE TABLE `funcionario` (
   `id_patrao` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `funcionario`
+--
+
+INSERT INTO `funcionario` (`id_func`, `nome_func`, `endereco_func`, `bairro_func`, `cep_func`, `cpf_func`, `email_func`, `telefone_func`, `rg_func`, `id_patrao`) VALUES
+(1, 'Jair', 'rua', 'araca', 1017575, 4321, 'w@2', 67890, 1234, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -73,6 +87,13 @@ CREATE TABLE `patrao` (
   `email_patrao` varchar(150) NOT NULL,
   `telefone_patrao` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `patrao`
+--
+
+INSERT INTO `patrao` (`id_patrao`, `nome_patrao`, `nome_empresa`, `endereco_patrao`, `email_patrao`, `telefone_patrao`) VALUES
+(1, 'Aldair', 'Aldair 177', 'teste', 'teste', 1234);
 
 -- --------------------------------------------------------
 
@@ -89,6 +110,13 @@ CREATE TABLE `socio` (
   `valor_contri` int(225) NOT NULL,
   `id_patrao` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `socio`
+--
+
+INSERT INTO `socio` (`id_socio`, `nome_socio`, `endereco_socio`, `email_socio`, `telefone_socio`, `valor_contri`, `id_patrao`) VALUES
+(1, 'Augusto', 'str', 'hjsxz', 1234, 4555, 1);
 
 --
 -- Indexes for dumped tables
@@ -129,22 +157,22 @@ ALTER TABLE `socio`
 -- AUTO_INCREMENT for table `fornecedor`
 --
 ALTER TABLE `fornecedor`
-  MODIFY `id_forn` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_forn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `id_func` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_func` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `patrao`
 --
 ALTER TABLE `patrao`
-  MODIFY `id_patrao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_patrao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `socio`
 --
 ALTER TABLE `socio`
-  MODIFY `id_socio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_socio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --
