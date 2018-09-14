@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.table.DefaultTableModel;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -48,30 +51,39 @@ public class FornecedoresJdbcDao {
 			e.printStackTrace();{}}
 		}
 		
-		public List<Fornecedor> listar() {
-			String sql = "select * from fornecedor";
-	        System.out.println(sql);		
-	        List<Fornecedor> Fornecedores = new ArrayList<Fornecedor>();
-			try {
-				PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
-				ResultSet rs = prepareStatement.executeQuery();
-				while(rs.next()) {
-					int id = rs.getInt("id");
-					String nome = rs.getString("nome_forn");
-					String nomeproduto = rs.getString("nome_produto");
-					String endereco = rs.getString("endereco_forn");
-					int telefone = rs.getInt("telefone_forn");
-					String email = rs.getString("email_forn");
-					int patrao = rs.getInt("id_patrao");
-					
-					Fornecedor fornecedor = new Fornecedor();
-					 System.out.println(nome + " " +  nomeproduto + " "  +  endereco + " " + telefone + " " + email + " " + patrao);
-				}
-				prepareStatement.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+public DefaultTableModel select() throws Exception{
+		
+		DefaultTableModel dtm = new DefaultTableModel() {
+			public boolean isCellEditable(int row, int column) {
+				return false;
 			}
-			return Fornecedores;
-}
+		};
+		
+		String sql = "select * from fornecedor";
+		
+		try {
+			PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
+			ResultSet rs = prepareStatement.executeQuery();
+			
+			dtm.addColumn("ID");
+			dtm.addColumn("Nome");
+			dtm.addColumn("Nome do produto");
+			dtm.addColumn("Endereço");
+			dtm.addColumn("E-mail");
+			dtm.addColumn("Telefone");
+			dtm.addColumn("Id do Patrão");
+			
+			while(rs.next()) {
+				dtm.addRow(new String[] {rs.getString("id_forn"),rs.getString("nome_forn"),rs.getString("nome_produto"),rs.getString("endereco_forn"),rs.getString("email_forn"),rs.getString("telefone_forn"),rs.getString("id_patrao")});
+			}
+			
+			prepareStatement.close();
+			
+		}catch(Exception s) {
+			s.printStackTrace();
+		}
+		
+		return dtm;
+	}
 	}
 
