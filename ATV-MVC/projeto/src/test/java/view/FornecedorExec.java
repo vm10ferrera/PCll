@@ -41,7 +41,7 @@ public class FornecedorExec extends JFrame{
     JButton btnSalvar = new JButton("Salvar");
     JButton btnDeletar = new JButton("Deletar");
     JButton btnAtualizar = new JButton("Atualizar");
-
+    JButton btnListar = new JButton("Listar");
 
     public FornecedorExec() {
     	super("Cadastro");
@@ -151,6 +151,15 @@ public class FornecedorExec extends JFrame{
     				ex.printStackTrace();
    				}
    				
+   			}
+   		});
+   		
+   		paine.add(btnListar);
+   		btnListar.setBounds(400, 225, 130, 30);
+   		btnListar.addActionListener(new ActionListener(){
+   			public void actionPerformed(ActionEvent e){
+    			ListarForn Forn = new ListarForn();
+    			Forn.setVisible(true);
    			}
    		});
     		
