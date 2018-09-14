@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.table.DefaultTableModel;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -48,33 +51,42 @@ public class FuncionariosJdbcDao {
 			e.printStackTrace();{}}
 		}
 		
-		public List<Funcionarios> listar() {
-			String sql = "select * from funcionario";
-	        System.out.println(sql);		
-	        List<Funcionarios> funcionarios = new ArrayList<Funcionarios>();
-			try {
-				PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
-				ResultSet rs = prepareStatement.executeQuery();
-				while(rs.next()) {
-					int id = rs.getInt("id_func");
-					String nome = rs.getString("nome_func");
-					String endereco = rs.getString("endereco_func");
-					String bairro = rs.getString("bairro_func");
-					int cep = rs.getInt("cep_func");
-					int rg = rs.getInt("rg_func");
-					int cpf = rs.getInt("cpf_func");
-					int telefone = rs.getInt("telefone_func");
-					String email = rs.getString("email_func");
-					int idpatr = rs.getInt("id_patrao");
-					
-					Funcionarios Funcionario = new Funcionarios();
-					 System.out.println(id + " " + nome + " " +  endereco + " " + bairro + " " + cep + " " + rg + " " + cpf + " " + telefone + " " + email + " " + idpatr);
-				}
-				prepareStatement.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+public DefaultTableModel select() throws Exception{
+		
+		DefaultTableModel dtm = new DefaultTableModel() {
+			public boolean isCellEditable(int row, int column) {
+				return false;
 			}
-			return funcionarios;
-}
+		};
+		
+		String sql = "select * from funcionario";
+		
+		try {
+			PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
+			ResultSet rs = prepareStatement.executeQuery();
+			
+			dtm.addColumn("ID");
+			dtm.addColumn("Nome");;
+			dtm.addColumn("Endereço");
+			dtm.addColumn("Bairro");
+			dtm.addColumn("CEP");
+			dtm.addColumn("CPF");
+			dtm.addColumn("E-mail");
+			dtm.addColumn("Telefone");
+			dtm.addColumn("RG");
+			dtm.addColumn("Id do Patrão");
+			
+			while(rs.next()) {
+				dtm.addRow(new String[] {rs.getString("id_func"),rs.getString("nome_func"),rs.getString("endereco_func"),rs.getString("bairro_func"),rs.getString("cep_func"),rs.getString("cpf_func"),rs.getString("email_func"),rs.getString("telefone_func"),rs.getString("rg_func"),rs.getString("id_patrao")});
+			}
+			
+			prepareStatement.close();
+			
+		}catch(Exception s) {
+			s.printStackTrace();
+		}
+		
+		return dtm;
+	}
 	}
 
