@@ -4,6 +4,7 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -51,6 +52,7 @@ public class FuncionarioExec extends JFrame{
     JButton btnSalvar = new JButton("Salvar");
     JButton btnDeletar = new JButton("Deletar");
     JButton btnAtualizar = new JButton("Atualizar");
+    JButton btnListar = new JButton("Listar");
 
     public FuncionarioExec() {
     	super("Cadastro");
@@ -60,47 +62,47 @@ public class FuncionarioExec extends JFrame{
     	paine.add(lblNome);
     	lblNome.setBounds(10, 15, 45, 30);
     	paine.add(txtNome);	
-    	txtNome.setBounds(90, 15, 225, 30);
+    	txtNome.setBounds(125, 15, 225, 30);
     	
     	paine.add(lblBairro);
     	lblBairro.setBounds(10, 50, 70, 30);
     	paine.add(txtBairro);	
-    	txtBairro.setBounds(90, 50, 225, 30);
+    	txtBairro.setBounds(125, 50, 225, 30);
     	
     	paine.add(lblRG);
     	lblRG.setBounds(10, 85, 95, 30);
     	paine.add(txtRG);	
-    	txtRG.setBounds(90, 85, 225, 30);
+    	txtRG.setBounds(125, 85, 225, 30);
     	
     	paine.add(lblCPF);
     	lblCPF.setBounds(10, 120, 120, 30);
     	paine.add(txtCPF);	
-    	txtCPF.setBounds(90, 120, 225, 30);
+    	txtCPF.setBounds(125, 120, 225, 30);
     	
     	paine.add(lblCEP);
     	lblCEP.setBounds(10, 155, 145, 30);
     	paine.add(txtCEP);	
-    	txtCEP.setBounds(90, 155, 225, 30);
+    	txtCEP.setBounds(125, 155, 225, 30);
     	
     	paine.add(lblEndereco);
     	lblEndereco.setBounds(10, 190, 170, 30);
     	paine.add(txtEndereco);	
-    	txtEndereco.setBounds(90, 190, 225, 30);
+    	txtEndereco.setBounds(125, 190, 225, 30);
     	
     	paine.add(lblEmail);
     	lblEmail.setBounds(10, 225, 195, 30);
     	paine.add(txtEmail);	
-    	txtEmail.setBounds(90, 225, 225, 30);
+    	txtEmail.setBounds(125, 225, 225, 30);
     	
     	paine.add(lblTel);
     	lblTel.setBounds(10, 260, 220, 30);
     	paine.add(txtTel);	
-    	txtTel.setBounds(90, 260, 225, 30);
+    	txtTel.setBounds(125, 260, 225, 30);
     	
     	paine.add(lblId);
     	lblId.setBounds(10, 295, 245, 30);
     	paine.add(txtId);	
-    	txtId.setBounds(90, 295, 225, 30);
+    	txtId.setBounds(125, 295, 225, 30);
     	
     	paine.add(lblIdPatr);
     	lblIdPatr.setBounds(10, 330, 270, 30);
@@ -183,6 +185,17 @@ public class FuncionarioExec extends JFrame{
    				
    			}
    		});
+   		
+   		paine.add(btnListar);
+   		btnListar.setBounds(400, 330, 130, 30);
+   		btnListar.addActionListener(new ActionListener(){
+   			public void actionPerformed(ActionEvent e){
+    			ListarFunc Func = new ListarFunc();
+    			Func.setVisible(true);
+   			}
+   		});
+   		
+
     		
     	this.setLayout(null);
     	this.setVisible(true);
